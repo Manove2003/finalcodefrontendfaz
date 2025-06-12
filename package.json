@@ -1,0 +1,79 @@
+{
+  "name": "mansion-market",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@ckeditor/ckeditor5-build-classic": "^44.3.0",
+    "@ckeditor/ckeditor5-react": "^9.5.0",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@floating-ui/react": "^0.27.8",
+    "@fontsource/inter": "^5.1.1",
+    "@fontsource/playfair-display": "^5.1.1",
+    "@googlemaps/extended-component-library": "^0.6.13",
+    "@mui/icons-material": "^6.3.1",
+    "@mui/material": "^6.4.3",
+    "@react-google-maps/api": "^2.20.6",
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "ajv": "^6.12.6",
+    "ajv-keywords": "^3.5.2",
+    "axios": "^1.7.9",
+    "browser-image-compression": "^2.0.2",
+    "date-fns": "^4.1.0",
+    "dompurify": "^3.2.5",
+    "file-saver": "^2.0.5",
+    "jodit-react": "^5.2.15",
+    "lucide-react": "^0.475.0",
+    "quill": "^2.0.3",
+    "react": "^18.2.0",
+    "react-datepicker": "^8.2.1",
+    "react-dom": "^18.2.0",
+    "react-flagkit": "^2.0.4",
+    "react-helmet-async": "^2.0.5",
+    "react-icons": "^5.4.0",
+    "react-image-lightbox": "^5.1.4",
+    "react-leaflet": "^5.0.0",
+    "react-phone-input-2": "^2.15.1",
+    "react-quill": "^2.0.0",
+    "react-router": "^7.6.0",
+    "react-router-dom": "^7.1.5",
+    "react-scripts": "5.0.1",
+    "react-slick": "^0.30.3",
+    "react-toastify": "^11.0.5",
+    "react-world-flags": "^1.6.0",
+    "slick-carousel": "^1.8.1",
+    "web-vitals": "^2.1.4",
+    "xlsx": "^0.18.5"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.17"
+  }
+}

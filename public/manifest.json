@@ -1,0 +1,25 @@
+{
+  "short_name": "Manion Market",
+  "name": "The Mansion Market",
+  "icons": [
+    {
+      "src": "./Fav_Icon_TMM.jpg",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "./Fav_Icon_TMM.jpg",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "./Fav_Icon_TMM.jpg",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}

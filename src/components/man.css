@@ -1,0 +1,17 @@
+/* Custom styling for the slider dots */
+.slick-dots {
+  position: absolute;
+  bottom: 16px; /* Adjust to position them outside the image */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10; /* Ensure dots are above other content */
+}
+
+.slick-dots li button:before {
+  font-size: 8px; /* Adjust size of dots */
+  color: rgba(0, 0, 0, 0.5); /* Change color of inactive dots */
+}
+
+.slick-dots li.slick-active button:before {
+  color: #ffffff; /* Change color of active dot */
+}

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 625 700">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <g id="Uploaded_to_svgrepo.com" data-name="Uploaded to svgrepo.com">
+    <path class="cls-1" d="M625,250l-225,225h-75v-75l225-225,75,75ZM550,360.35v339.65H0V0h550v139.65l-185.35,185.35h-189.65v25h164.65l-39.65,39.65v10.35h-125v25h125v50h-125v25h235.35l139.65-139.65ZM175,200h200v-25h-200v25ZM175,275h200v-25h-200v25Z"/>
+  </g>
+</svg>
