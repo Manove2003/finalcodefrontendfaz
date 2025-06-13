@@ -150,7 +150,7 @@ const HomePageForm = () => {
 
   const BASE_URL =
     process.env.NODE_ENV === "production"
-      ? "https://backend-5kh4.onrender.com"
+      ? "https://backendfaz.onrender.com"
       : "http://localhost:5001";
 
   useEffect(() => {
