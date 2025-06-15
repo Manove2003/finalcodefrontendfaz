@@ -157,14 +157,15 @@ const ResponsiveHero = ({ searchQuery, onSearchChange, onSearchSubmit }) => {
         </form>
 
         {/* Heading and Subheading */}
-        <div className="mt-12 md:mt-16 text-center px-2 md:px-4 w-full">
-          <h1 className="font-playfair text-2xl sm:text-3xl md:text-5xl lg:text-6xl mb-4 leading-tight max-w-5xl mx-auto">
-            {heading}
-          </h1>
-          <p className="font-inter text-sm sm:text-base md:text-lg max-w-3xl mx-auto leading-relaxed">
-            {subheading}
-          </p>
-        </div>
+<div className="mt-12 md:mt-16 text-center px-2 md:px-4 w-full  relative">
+  <h1 className="font-playfair text-2xl sm:text-3xl md:text-5xl z-0 lg:text-6xl mb-4 leading-tight max-w-5xl mx-auto">
+    {heading}
+  </h1>
+  <p className="font-inter text-sm sm:text-base md:text-lg max-w-3xl z-0 mx-auto leading-relaxed">
+    {subheading}
+  </p>
+</div>
+
       </div>
     </div>
   );

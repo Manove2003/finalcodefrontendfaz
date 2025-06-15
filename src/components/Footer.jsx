@@ -150,21 +150,22 @@ const Footer = () => {
                         highlighting the hottest luxury offerings, accompanied
                         by exclusive insights.
                       </p>
-                      <form onSubmit={handleSubscribe}>
-                        <div className="mt-8 flex items-center flex-col md:flex-row gap-2">
-                          <input
-                            type="email"
-                            placeholder="email@example.com"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            className="flex-1 px-4 py-2 border text-[#000000] border-gray-300 outline-none"
-                            required
-                          />
-                          <button className="font-inter px-8 md:px-12 py-[8px] text-black border border-[#00603A] hover:bg-[#00603A] hover:text-white transition-all duration-300">
-                            SIGN UP
-                          </button>
-                        </div>
-                      </form>
+                <form onSubmit={handleSubscribe}>
+  <div className="mt-8 flex items-center flex-col md:flex-row gap-2">
+    <input
+      type="email"
+      placeholder="email@example.com"
+      value={email}
+      onChange={(e) => setEmail(e.target.value)}
+      className="flex-1 px-0 py-2 border text-[#000000] text-center border-gray-300 outline-none"
+      required
+    />
+    <button className="w-full md:w-auto font-inter px-8 md:px-12 py-[8px] text-black border border-[#00603A] hover:bg-[#00603A] hover:text-white transition-all duration-300">
+      SIGN UP
+    </button>
+  </div>
+</form>
+
                     </>
                   )}
                 </div>

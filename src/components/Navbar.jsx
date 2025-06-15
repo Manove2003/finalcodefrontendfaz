@@ -26,7 +26,7 @@ const Navbar = () => {
           {isOpen ? (
             <X size={25} />
           ) : (
-            <img src={iconmenu} className="w-6" alt="imgae" />
+            <img src={iconmenu} className="w-6 -pt-4" alt="imgae" />
           )}
         </button>
       </div>

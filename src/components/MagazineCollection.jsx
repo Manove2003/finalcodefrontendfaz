@@ -317,16 +317,16 @@ Discover expert articles, market insights, and lifestyle features on luxury prop
           </div>
         </div>
 
-        <div className="bg-[#f5f5f5] py-12 px-4 md:px-8 lg:px-16 mx-2 mt-0 md:mt-8">
+        <div className="bg-[#f5f5f5] py-8 px-4 md:px-20 lg:px-28 mx-6 mt-0 md:mt-8">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-xl md:text-3xl font-playfair text-[#00603A] mb-16">
+            <h2 className="text-xl md:text-3xl font-playfair text-[#00603A] mt-4">
               Read the opinions shared by our clients
             </h2>
 
             {reviews.length > 0 && (
               <>
                 {/* Fixed height review box */}
-        <div className="h-72 md:h-56 overflow-hidden mb-8 flex items-center justify-center text-center">
+        <div className="h-72 md:h-40 overflow-hidden  flex items-center justify-center text-center">
   <p className="text-gray-700 text-lg leading-relaxed">
     {reviews[currentReviewIndex].content}
   </p>

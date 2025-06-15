@@ -323,122 +323,121 @@ const Magazine = () => {
       )}
 
       {categories.map((cat, index) => {
-        const sectionId = cat.category.replace(/\s+/g, "-").toLowerCase(); // e.g., "the mansion guide" => "the-mansion-guide"
+  const sectionId = cat.category.replace(/\s+/g, "-").toLowerCase(); // e.g., "the mansion guide" => "the-mansion-guide"
 
-        const categoryArticles = articlesToDisplay.filter(
-          (article) =>
-            article.category &&
-            article.category.toLowerCase() === cat.category.toLowerCase()
-        );
-        const selectedArticle =
-          categoryArticles[0] || dummyArticles[index % dummyArticles.length];
+  const categoryArticles = articlesToDisplay.filter(
+    (article) =>
+      article.category &&
+      article.category.toLowerCase() === cat.category.toLowerCase()
+  );
+  const selectedArticle =
+    categoryArticles[0] || dummyArticles[index % dummyArticles.length];
 
-        return (
-          <section
-            key={index}
-            id={sectionId}
-            className="px-4 py-10 md:px-10 lg:px-20"
+  return (
+    <section
+      key={index}
+      id={sectionId}
+      className="px-4 py-10 md:px-10 lg:px-20"
+    >
+      <h2 className="text-3xl mb-8 text-center md:text-start font-playfair text-[#00603A]">
+        {cat.name}
+      </h2>
+
+      {categoryArticles.length > 0 ? (
+        <div className="grid md:grid-cols-1 gap-8">
+          <div
+            className="grid grid-cols-1 md:grid-cols-2 gap-6 cursor-pointer"
+            onClick={() => handleCardClick(selectedArticle._id)}
           >
-            <h2 className="text-3xl mb-8 text-center md:text-start font-playfair text-[#00603A]">
-              {cat.name}
-            </h2>
+            <img
+              src={
+                selectedArticle.mainImage
+                  ? `${selectedArticle.mainImage}`
+                  : selectedArticle.image || newImage
+              }
+              alt="Main Article"
+              className="w-full h-60 md:h-auto object-cover"
+              onError={(e) => (e.target.src = newImage)}
+            />
+            <div className="flex flex-col">
+              <div className="space-y-10">
+                <h3 className="text-2xl font-playfair">
+                  {selectedArticle.title}
+                </h3>
+                <p className="text-gray-700 mt-2 font-inter">
+                  {selectedArticle.subtitle || selectedArticle.description}
+                </p>
+                <p className="text-gray-700 mt-2 font-inter">
+                  {selectedArticle.category || cat.category}
+                </p>
+                <p className="text-sm text-gray-500 font-inter">
+                  {selectedArticle.time
+                    ? new Date(selectedArticle.time).toLocaleDateString(
+                        "en-US",
+                        {
+                          year: "numeric",
+                          month: "long",
+                          day: "numeric",
+                        }
+                      )
+                    : selectedArticle.date}
+                </p>
+              </div>
+            </div>
+          </div>
 
-            {categoryArticles.length > 0 ? (
-              <div className="grid md:grid-cols-1 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-4 gap-6">
+            {categoryArticles
+              .filter((article) => article._id !== selectedArticle._id) // Exclude the main article
+              .slice(0, 4)
+              .map((article, idx) => (
                 <div
-                  className="grid grid-cols-1 md:grid-cols-2 gap-6 cursor-pointer"
-                  onClick={() => handleCardClick(selectedArticle._id)}
+                  key={idx}
+                  className="flex flex-col cursor-pointer"
+                  onClick={() => handleCardClick(article._id)}
                 >
                   <img
                     src={
-                      selectedArticle.mainImage
-                        ? `${selectedArticle.mainImage}`
-                        : selectedArticle.image || newImage
+                      article.mainImage
+                        ? `${article.mainImage}`
+                        : article.image || newImage
                     }
-                    alt="Main Article"
-                    className="w-full h-60 md:h-auto object-cover"
+                    alt={article.title}
+                    className="w-full h-40 object-cover"
                     onError={(e) => (e.target.src = newImage)}
                   />
-                  <div className="flex flex-col">
-                    <div className="space-y-10">
-                      <h3 className="text-2xl font-playfair">
-                        {selectedArticle.title}
-                      </h3>
-                      <p className="text-gray-700 mt-2 font-inter">
-                        {selectedArticle.subtitle ||
-                          selectedArticle.description}
-                      </p>
-                      <p className="text-gray-700 mt-2 font-inter">
-                        {selectedArticle.category || cat.category}
-                      </p>
-                      <p className="text-sm text-gray-500 font-inter">
-                        {selectedArticle.time
-                          ? new Date(selectedArticle.time).toLocaleDateString(
-                              "en-US",
-                              {
-                                year: "numeric",
-                                month: "long",
-                                day: "numeric",
-                              }
-                            )
-                          : selectedArticle.date}
-                      </p>
-                    </div>
+                  <div className="mt-4">
+                    <span className="text-sm text-gray-500 uppercase font-inter">
+                      {article.category || cat.category}
+                    </span>
+                    <h4 className="text-lg mt-2 font-playfair">
+                      {article.title}
+                    </h4>
+                    <p className="text-sm text-gray-500 mt-2">
+                      {article.time
+                        ? new Date(article.time).toLocaleDateString(
+                            "en-US",
+                            {
+                              year: "numeric",
+                              month: "long",
+                              day: "numeric",
+                            }
+                          )
+                        : article.date}
+                    </p>
                   </div>
                 </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-4 gap-6">
-                  {categoryArticles.slice(0, 4).map((article, idx) => (
-                    <div
-                      key={idx}
-                      className="flex flex-col cursor-pointer"
-                      onClick={() => handleCardClick(article._id)}
-                    >
-                      <img
-                        src={
-                          article.mainImage
-                            ? `${article.mainImage}`
-                            : article.image || newImage
-                        }
-                        alt={article.title}
-                        className="w-full h-40 object-cover"
-                        onError={(e) => (e.target.src = newImage)}
-                      />
-                      <div className="mt-4">
-                        <span className="text-sm text-gray-500 uppercase font-inter">
-                          {article.category || cat.category}
-                        </span>
-                        <h4 className="text-lg mt-2 font-playfair">
-                          {article.title}
-                        </h4>
-                        <p className="text-gray-700 mt-2 font-inter">
-                          {article.category || cat.category}
-                        </p>
-                        <p className="text-sm text-gray-500 mt-1">
-                          {article.time
-                            ? new Date(article.time).toLocaleDateString(
-                                "en-US",
-                                {
-                                  year: "numeric",
-                                  month: "long",
-                                  day: "numeric",
-                                }
-                              )
-                            : article.date}
-                        </p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ) : (
-              <p className="text-gray-500">
-                No articles available for {cat.name}.
-              </p>
-            )}
-          </section>
-        );
-      })}
+              ))}
+          </div>
+        </div>
+      ) : (
+        <p className="text-gray-500">
+          No articles available for {cat.name}.
+        </p>
+      )}
+    </section>
+  );
+})}
 
       <div className="flex justify-center mt-8">
         <div className="text-center">
@@ -474,7 +473,7 @@ const Magazine = () => {
                       <p className="mt-2  font-inter text-center md:text-start">
                         {article.subtitle || article.description}
                       </p>
-                      <p className="  text-gray-600 font-inter text-center md:text-start">
+                      <p className="  text-gray-600 font-inter text-center mt-3 md:text-start">
                         {article.category || "Lifestyle"}
                       </p>
                       <p className="text-gray-600 mt-2  font-inter text-center md:text-start">

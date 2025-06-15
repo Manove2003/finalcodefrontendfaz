@@ -228,8 +228,8 @@ const FeaturedListings = ({ searchQuery }) => {
     <>
       {/* Search Results Section */}
       {hasSearched && searchQuery.trim() && (
-        <div id="search-results" className="px-4 md:px-10 lg:px-20 py-12">
-          <h2 className="text-3xl font-playfair text-[#00603A] text-center mb-8">
+        <div id="search-results" className="-mt-60 w-full relative z-50 bg-gray-50">
+          <h2 className="text-3xl font-playfair text-[#00603A] text-center mb-8 bg-gray-50">
             {loading.search ? "Searching..." : `Results for "${searchQuery}"`}
           </h2>
 
@@ -252,7 +252,7 @@ const FeaturedListings = ({ searchQuery }) => {
               </p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="px-4 md:px-10 lg:px-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 z-9999 gap-6 bg-white">
               {searchResults.map((mansion) => (
                 <MansionCard key={mansion.reference} mansion={mansion} />
               ))}

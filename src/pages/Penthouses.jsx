@@ -445,8 +445,8 @@ const Penthouses = () => {
       </div>
       <div className="w-full pt-4 py-10 px-4 md:px-10 lg:px-20 py-12  mt-4 border-t-2 border-[#00603A]">
         <h2
-         className="text-2xl md:text-3xl text-center  capitalize
- mt-6 font-playfair text-[#00603A] mb-12"
+            className="text-2xl md:text-3xl text-center  capitalize
+ mt-12 font-playfair text-[#00603A] mb-16"
          >
           Mansions And Penthouses For Sale
         </h2>

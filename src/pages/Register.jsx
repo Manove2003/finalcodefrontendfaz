@@ -294,7 +294,7 @@ const Register = () => {
             owners.
           </p>
         </div>
-        <div className="mt-20 mb-16">
+        <div className="mt-16 mb-8">
           <a
             href="https://forms.gle/DK3nCFoGdoHhhiqWA"
             target="_blank"
@@ -324,19 +324,17 @@ const Register = () => {
           <h2 className="text-2xl md:text-3xl w-full md:w-[500px] font-playfair text-[#000000] mb-12">
             The <span className="text-[#00603A]">Mansion Market Magazine</span>
           </h2>
-          <p className="text-gray-600 mb-6 font-inter mb-12 mr-0 md:mr-16 ">
-            Expert articles, market insights, and lifestyle features that
-            showcase the latest in luxury properties and valuable assets. Check
-            out our journal for exclusive updates, tips, and intriguing stories
-            that celebrate the world of high-end real estate in Dubai and
-            beyond.
+          <p className="text-gray-600 mb-6 font-inter mb-12 mr-0 md:mr-20 ">
+           Discover expert articles, market insights, and lifestyle features on luxury properties and valuable assets. Read exclusive updates, tips, and captivating stories.
+
+
           </p>
           <Link to="/magazine">
             <button
               //  className="px-8 py-3 w-full mt-6 md:w-[300px] font-inter text-black border border-[#00603A] hover:bg-[#00603A] hover:text-white transition-all duration-300"
-              className="font-inter  px-20 py-3 text-black border border-[#00603A] hover:bg-[#00603A] hover:text-white transition-all duration-300"
+              className="font-inter my-4  px-20 py-3 text-black border border-[#00603A] hover:bg-[#00603A] hover:text-white transition-all duration-300"
             >
-              Explore magazine
+              Explore Magazine
             </button>
           </Link>
         </div>

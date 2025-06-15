@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { useMansions } from "../context/MansionContext";
-import SearchBar from "../components/SearchBar";
-import Breadcrumb from "./Breadcrumb";
 import {
   ArrowUp,
   X,
@@ -35,12 +33,15 @@ import newImage1 from "../assests/image 5.png";
 import newImage2 from "../assests/BrandedResi-P.jpg";
 import newImage3 from "../assests/Mansions.jpg";
 import MansionCard from "../components/Card";
+import SimilarListing from "../components/SimilarListing";
 import Footer from "../components/Footer";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { Link } from "react-router-dom";
-import PropertyLocationMap from "../components/PropertyLocationMap";
+import PropertyLocationMap from '../components/PropertyLocationMap'
 import { useCurrency } from "../context/CurrencyContext";
+import SearchBar from "../components/SearchBar";
+import Breadcrumb from "./Breadcrumb";
 
 const ListingPage = () => {
   const [phonenumber, setphonenumber] = useState("");
@@ -80,24 +81,26 @@ const ListingPage = () => {
   const menuRef = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
 
-  
+  const formatPrice = (price) => {
+    if (!price) return '0';
+    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  };
 
   useEffect(() => {
     if (shareModalOpen) {
-      document.body.style.overflow = "hidden"; // Disable body scroll
+      document.body.style.overflow = 'hidden';
     } else {
-      document.body.style.overflow = ""; // Re-enable body scroll
+      document.body.style.overflow = '';
     }
-    // Cleanup on component unmount
     return () => {
-      document.body.style.overflow = "";
+      document.body.style.overflow = '';
     };
   }, [shareModalOpen]);
 
   const images = [newImage1, newImage2, newImage3];
   const BASE_URL =
     process.env.NODE_ENV === "production"
-       ? "https://backendfaz.onrender.com"
+      ? "https://backend-5kh4.onrender.com"
       : "http://localhost:5001";
   const FALLBACK_IMAGE = "/images/fallback.jpg";
 
@@ -155,18 +158,6 @@ const ListingPage = () => {
     return () => clearTimeout(searchTimeoutRef.current);
   }, [searchQuery]);
 
-   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
-
-    return () => {
-      document.body.style.overflow = "auto"; // Cleanup in case modal is unmounted
-    };
-  }, [isOpen]);
-
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -185,7 +176,6 @@ const ListingPage = () => {
       </div>
     );
   }
- 
 
   const property = mansions?.find((m) => m.reference === reference) || {
     propertytype: "Mansion",
@@ -327,12 +317,6 @@ const ListingPage = () => {
     setShareModalOpen(true);
   };
 
-
-  const formatPrice = (price) => {
-    if (!price) return "0";
-    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  };
-
   const getShareUrl = () => {
     return `${window.location.origin}/mansion/${property.reference}`;
   };
@@ -340,11 +324,7 @@ const ListingPage = () => {
   const encodeShareText = () => {
     const convertedPrice = convertPrice(property.price || 0);
     return encodeURIComponent(
-      `Check out this ${property.propertytype}: ${
-        property.title
-      } - ${currency} ${convertedPrice} in ${
-        property.community || property.category || "N/A"
-      }, ${property.country || "N/A"}`
+      `Check out this ${property.propertytype}: ${property.title} - ${currency} ${convertedPrice} in ${property.community || property.category || "N/A"}, ${property.country || "N/A"}`
     );
   };
 
@@ -383,11 +363,15 @@ const ListingPage = () => {
     );
   };
 
-  const shareToWhatsApp = () => {
+  const shareToWhatsApp = (includeNumber = true) => {
+    const whatsappNumber = property.whatsaapno || property.whatsappNo || "+971501234567";
+    const shareText = encodeURIComponent(
+      `Check out this ${property.propertytype}: ${property.title} - ${currency} ${convertPrice(property.price || 0)} in ${property.community || property.category || "N/A"}, ${property.country || "N/A"} ${
+        includeNumber ? ` Contact: ${whatsappNumber}` : ""
+      }`
+    );
     window.open(
-      `https://api.whatsapp.com/send?text=${encodeShareText()}%20${encodeURIComponent(
-        getShareUrl()
-      )}`,
+      `https://api.whatsapp.com/send?text=${shareText}%20${encodeURIComponent(getShareUrl())}`,
       "_blank",
       "noopener,noreferrer"
     );
@@ -395,8 +379,8 @@ const ListingPage = () => {
 
   const highlightText = (text, query) => {
     if (!query || !text) return text;
-    const regex = new RegExp(`(${query})`, "gi");
-    return text.replace(regex, "<mark>$1</mark>");
+    const regex = new RegExp(`(${query})`, 'gi');
+    return text.replace(regex, '<mark>$1</mark>');
   };
 
   const isCollectible = property.propertytype === "Luxury Collectibles";
@@ -411,8 +395,8 @@ const ListingPage = () => {
         : "Location unavailable";
   } else {
     locationText = `${property.community || "N/A"}, ${
-      property.propertyaddress || "N/A"
-    }, ${property.subcommunity || "N/A"}`;
+      property.subcommunity || "N/A"
+    }, ${property.country || "N/A"}`;
   }
 
   const fallbackText =
@@ -433,7 +417,7 @@ const ListingPage = () => {
               alt="logo"
             />
           </Link>
-          <div className="flex gap-2 w-full md:w-auto items-center ">
+          <div className="flex gap-2 w-full md:w-auto items-center">
             <div className="flex items-center w-full md:w-[300px] border border-[#000000] shadow-sm">
               <SearchBar
                 searchQuery={searchQuery}
@@ -442,13 +426,9 @@ const ListingPage = () => {
               />
             </div>
             <button
-              type="button"
-              onClick={() => setSearchQuery(searchQuery)}
-              className="bg-[#00603A] px-4 py-[12px] flex items-center justify-center border border-[#00603A] text-white hover:text-[#00603A] hover:bg-transparent transition"
+              className="p-2"
+              onClick={() => setMenuOpen(!menuOpen)}
             >
-              <FaSearch className="font-thin hover:text-[#00603A]" />
-            </button>
-            <button className="p-2" onClick={() => setMenuOpen(!menuOpen)}>
               {menuOpen ? (
                 <X className="w-6 h-6 text-[#000000]" />
               ) : (
@@ -466,7 +446,7 @@ const ListingPage = () => {
                 { name: "Penthouses", href: "/penthouses" },
                 { name: "Developments", href: "/newdevelopment" },
                 { name: "Magazine", href: "/magazine" },
-                { name: "Luxe Collectibles", href: "/luxecollectibles" },
+                { name: "Luxe Collectibles", href: "/listedcollectibles" },
               ].map((link, index) => (
                 <a
                   key={index}
@@ -481,35 +461,30 @@ const ListingPage = () => {
               </p>
               <div className="flex justify-start mt-4 py-4 space-x-6 mb-2">
                 <a
-                  target="_blank"
                   href="https://www.facebook.com/themansionmarketcom"
                   className="text-[#00603A] hover:text-gray-400 text-2xl"
                 >
                   <FaFacebook />
                 </a>
                 <a
-                  target="_blank"
                   href="https://x.com/the_mansion_m"
                   className="text-[#00603A] hover:text-gray-400 text-2xl"
                 >
                   <FaXTwitter />
                 </a>
                 <a
-                  target="_blank"
                   href="https://www.instagram.com/themansionmarketcom"
                   className="text-[#00603A] hover:text-gray-400 text-2xl"
                 >
                   <FaInstagram />
                 </a>
                 <a
-                  target="_blank"
                   href="https://www.linkedin.com/company/the-mansion-market"
                   className="text-[#00603A] hover:text-gray-400 text-2xl"
                 >
                   <FaLinkedin />
                 </a>
                 <a
-                  target="_blank"
                   href="https://www.youtube.com/@TheMansionMarket"
                   className="text-[#00603A] hover:text-gray-400 text-2xl"
                 >
@@ -519,7 +494,7 @@ const ListingPage = () => {
             </div>
           </div>
         )}
-         <div className="w-full mt-16">
+        <div className="w-full mt-6">
           <Breadcrumb property={property} />
         </div>
         {hasSearched && searchQuery.trim() && (
@@ -527,7 +502,12 @@ const ListingPage = () => {
             <h2 className="text-2xl text-[#00603A] mb-6 font-inter text-center">
               {searchLoading ? "Searching..." : `Results for "${searchQuery}"`}
             </h2>
-            {searchError ? (
+            {searchLoading ? (
+              <div className="text-center">
+                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#00603A] mx-auto"></div>
+                <p className="text-gray-600 mt-4">Searching properties...</p>
+              </div>
+            ) : searchError ? (
               <div className="text-center">
                 <p className="text-red-600 mb-4">{searchError}</p>
               </div>
@@ -561,11 +541,11 @@ const ListingPage = () => {
             )}
           </div>
         )}
-        <div className="flex flex-col md:space-x-6 mt-2   space-x-2 md:space-y-0 text-center">
+        <div className="flex flex-col md:space-x-6 mt-4 py-6 md:mt-6 space-x-2 md:space-y-0 text-center">
           <h3 className="text-3xl pt-6 font-playfair text-[#000000] text-center mb-8 bg-white">
             {property.title || "Untitled Property"}
           </h3>
-          <p className="text-base text-center  font-inter pb-8">
+          <p className="text-base text-center font-inter">
             {isCollectible
               ? `${property.category || "Luxury Item"} | ${
                   property.propertytype
@@ -590,7 +570,7 @@ const ListingPage = () => {
             Show All Photos
           </button>
         </div>
-        <div className="w-full mx-auto py-16 lg:flex lg:justify-between border-b border-black">
+        <div className="w-full mx-auto py-20 lg:flex lg:justify-between border-b border-black">
           <div className="w-full lg:w-7/12">
             {isCollectible ? (
               <div className="bg-white mb-6">
@@ -665,16 +645,11 @@ const ListingPage = () => {
                   {locationText}
                 </p>
                 <p
-                  className="text-3xl font-inter text-[#00603A] mt-4"
-                  dangerouslySetInnerHTML={{
-                    __html: highlightText(
-                      `${currency} ${formatPrice(
-                        convertPrice(property.price || 0)
-                      )}`,
-                      searchQuery
-                    ), // Use formatted price
-                  }}
-                />
+            className="text-3xl font-inter text-[#00603A] mt-4"
+            dangerouslySetInnerHTML={{
+              __html: highlightText(`${currency} ${formatPrice(convertPrice(property.price || 0))}`, searchQuery),
+            }}
+          />
                 <p className="text-sm text-gray-500 mt-2 font-inter">
                   PROPERTY REF: {property.reference || "N/A"}
                 </p>
@@ -771,11 +746,10 @@ const ListingPage = () => {
                     </div>
                     <div className="flex gap-2 mt-4 border-b pb-4">
                       <a
-                        href={`https://wa.me/${
-                          property.whatsaapno ||
-                          property.whatsappNo ||
-                          "+971501234567"
-                        }`}
+                        href={`https://wa.me/${property.whatsaapno || property.whatsappNo || "+971501234567"}?text=${encodeURIComponent(
+    `Check out this ${property.propertytype}: ${property.title} - ${currency} ${convertPrice(property.price || 0)} in ${property.community || property.category || "N/A"}, ${property.country || "N/A"} - ${property.agentname || "N/A"}`
+  )}`}
+  target="__blank"
                         className="text-[#00603A] font-inter flex items-center space-x-1"
                       >
                         <FaWhatsapp />
@@ -861,8 +835,8 @@ const ListingPage = () => {
           </div>
         </div>
         <div className="w-full mx-auto mt-8">
-          <h2 className="text-3xl text-center mb-12 mt-8  font-playfair text-[#00603A]">
-            Similar Listings
+          <h2 className="text-3xl text-center mb-12 mt-8 font-playfair text-[#00603A]">
+            Similar {isCollectible ? "Collectibles" : "Properties"} Listing
           </h2>
           {similarListings.length === 0 ? (
             <p className="text-gray-600 text-center w-full text-lg">
@@ -872,10 +846,11 @@ const ListingPage = () => {
             <>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {similarListings.slice(0, visibleCount).map((mansion) => (
-                  <MansionCard
+                  <SimilarListing
                     key={mansion.reference}
                     mansion={mansion}
                     searchQuery={searchQuery}
+                    onShare={() => handleShareClick(mansion)}
                   />
                 ))}
               </div>
@@ -883,7 +858,7 @@ const ListingPage = () => {
                 <div className="flex justify-center mt-8">
                   <button
                     onClick={handleViewMore}
-                    className="px-12 py-2 border border-[#00603A] rounded-none text-[#00603A] bg-white hover:bg-[#00603A] hover:text-white transition text-sm font-medium"
+                    className="px-3 py-2 border border-[#00603A] rounded-none text-[#00603A] bg-white hover:bg-[#00603A] hover:text-white transition text-sm font-medium"
                   >
                     View More
                   </button>
@@ -1000,17 +975,16 @@ const ListingPage = () => {
                         {property.propertytype || "Property Type"} |{" "}
                         {property.bedrooms || "Bedrooms"} beds |{" "}
                         {property.bathrooms || "Bathrooms"} baths |{" "}
-                        {property.size || "Area"} sq.ft. |{" "}
-                        {property.builtuparea || "Plot Area"} sq. ft. plot
+                        {property.area || "Area"} sq. ft. |{" "}
+                        {property.plotarea || "Plot Area"} sq. ft. plot
                       </p>
                     </div>
-                    <div className="flex gap-2 mt-4  pb-4">
+                    <div className="flex gap-2 mt-4 border-b pb-4">
                       <a
-                        href={`https://wa.me/${
-                          property.whatsaapno ||
-                          property.whatsappNo ||
-                          "+971501234567"
-                        }`}
+                        href={`https://wa.me/${property.whatsaapno || property.whatsappNo || "+971501234567"}?text=${encodeURIComponent(
+    `Check out this ${property.propertytype}: ${property.title} - ${currency} ${convertPrice(property.price || 0)} in ${property.community || property.category || "N/A"}, ${property.country || "N/A"} - ${property.agentname || "N/A"}`
+  )}`}
+  target="__blank"
                         className="text-[#00603A] font-inter flex items-center space-x-1"
                       >
                         <FaWhatsapp />
@@ -1027,6 +1001,12 @@ const ListingPage = () => {
                         <span>Call</span>
                       </a>
                     </div>
+                    <button
+                      onClick={() => shareToWhatsApp(true)}
+                      className="mt-4 w-full py-2 flex items-center justify-center gap-2 font-inter text-black border border-[#00603A] hover:bg-[#00603A] hover:text-white transition-all duration-300"
+                    >
+                      <FaWhatsapp /> Share via WhatsApp
+                    </button>
                   </div>
                 </div>
               </div>
