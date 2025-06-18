@@ -273,7 +273,7 @@ Discover expert articles, market insights, and lifestyle features on luxury prop
 
       <div className="min-h-screen px-4 py-12 mt-8 md:px-8 lg:px-8 border-t border-[#00603A]">
         <div className="p-2 md:p-6 pb-6 md:pb-6">
-          <div className="text-center flex-1 p-4 md:p-6 flex flex-col justify-center items-center">
+          {/* <div className="text-center flex-1 p-4 md:p-6 flex flex-col justify-center items-center">
             <h2 className="text-2xl md:text-3xl  font-playfair  mb-8">
               <span className="text-[#00603A] font-playfair">
                 {iconicData?.title || "The Spotlight On Iconic Estate"}
@@ -289,29 +289,45 @@ Discover expert articles, market insights, and lifestyle features on luxury prop
                 EDITION
               </span>
             </h2>
-          </div>
+          </div> */}
           <div className="flex flex-col md:flex-row items-center justify-center">
-            <div className="w-[320px] md:w-[740px] md:h-[320px] lg:h-[420px] font-inter flex flex-col items-center md:items-start px-6 md:px-16 lg:px-32 justify-center space-y-4 text-center md:text-left">
-              <h3 className="text-xl md:text-3xl text-gray-700 leading-[2] tracking-[2px] mb-2 md:mb-12">
+            <div className="w-[320px] md:w-[740px] md:h-[320px] lg:h-[420px] font-inter flex flex-col items-center md:items-start px-6 md:px-16 lg:px-20 justify-center space-y-4 text-center md:text-left">
+              {/* <h3 className="text-xl md:text-3xl text-gray-700 leading-[2] tracking-[2px] mb-2 md:mb-12">
                 {iconicData?.title || "The Spotlight On Iconic Estate"}
-              </h3>
-              <p className="text-gray-600 text-[12px] md:text-base mt-2 leading-[2] tracking-[1px]">
+              </h3> */}
+                    <h2 className="text-2xl md:text-3xl  font-playfair  mb-8">
+              <span className="text-[#00603A] font-playfair">
+                {iconicData?.title || "The Spotlight On Iconic Estate"}
+              </span>{" "}
+              <span className="text-[#000000] leading-[2] font-inter font-thin pr-4">
+                |
+              </span>
+              <span className="text-black font-inter tracking-[8px]">
+                {iconicData?.year || "2025"}
+              </span>
+              <span className="text-[#000000] font-inter font-thin">
+                {" "}
+                EDITION
+              </span>
+            </h2>
+              <p className="text-gray-600 text-[13px]  mt-2 pb-6   md:pb-8 text-transform: uppercase">
                 {iconicData?.subtitle || "The Spotlight On Iconic Estate"}
               </p>
               <a href="/signupsection">
                 <button
                   // className="w-[300px] md:w-full mt-6 p-2 text-base tracking-[0px] md:tracking-[2px] font-inter px-1 md:px-8 py-4 text-[#00603A] border border-[#00603A] hover:bg-[#00603A] hover:text-white transition-all duration-300"
-                  className="font-inter  md:w-max:[400px] px-4  py-3 text-black border border-[#00603A] mt-6 tracking-[0px] md:tracking-[2px] hover:bg-[#00603A] hover:text-white transition-all duration-300"
+                   className="font-inter px-8 py-3 text-black border border-[#00603A] mt-6  hover:bg-[#00603A] hover:text-white transition-all duration-300"
+                  //className="font-inter  md:w-max:[400px] px-4  py-3 text-black border border-[#00603A] mt-6 tracking-[0px] md:tracking-[2px] hover:bg-[#00603A] hover:text-white transition-all duration-300"
                 >
                   {iconicData?.btnText || "SIGN UP FOR YOUR COPY"}
                 </button>
               </a>
             </div>
-            <div className="w-full md:w-[740px] px-6 md:px-0 flex justify-center items-center mt-4 md:mt-0">
+            <div className="w-full md:w-[740px] px-4 md:px-0 flex justify-center items-center mt-8 md:mt-0">
               <img
                 src={iconicData?.photoHome || mockupimg}
                 alt="Book Cover"
-                className="w-full max-w-[320px] md:max-w-full h-auto object-contain"
+                className="w-full max-w-4xl md:max-w-full h-auto object-contain"
               />
             </div>
           </div>

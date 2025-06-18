@@ -333,7 +333,7 @@ const SignupSection = () => {
           </div>
           <div className="md:w-1/2 flex justify-center items-center mt-6 md:mt-0 border-0 lg:border-l lg:border-l-[#000000] pl-6">
             <img
-              src={iconicData?.photoHome || Mockupimg}
+              src={iconicData?.photoSignup || Mockupimg}
               alt="Magazine Preview"
               className="max-w-full h-auto"
             />

@@ -237,6 +237,8 @@ const ListingPage = () => {
     );
   }
 
+   const baseUrl = window.location.origin
+
   const handleChange = (e) => {
     setFormData((prev) => ({
       ...prev,
@@ -366,10 +368,10 @@ const ListingPage = () => {
   const shareToWhatsApp = (includeNumber = true) => {
     const whatsappNumber = property.whatsaapno || property.whatsappNo || "+971501234567";
     const shareText = encodeURIComponent(
-      `Check out this ${property.propertytype}: ${property.title} - ${currency} ${convertPrice(property.price || 0)} in ${property.community || property.category || "N/A"}, ${property.country || "N/A"} ${
-        includeNumber ? ` Contact: ${whatsappNumber}` : ""
-      }`
+      `Check out this ${property.propertytype}: ${property.title} - ${currency} ${convertPrice(property.price || 0)} in ${property.community || property.category || ""}, ${property.country || ""} 
+      `
     );
+  
     window.open(
       `https://api.whatsapp.com/send?text=${shareText}%20${encodeURIComponent(getShareUrl())}`,
       "_blank",
@@ -387,10 +389,10 @@ const ListingPage = () => {
 
   let locationText = "";
   if (isCollectible) {
-    const community = property.community || property.location || "N/A";
-    const country = property.country || "N/A";
+    const community = property.community || property.location || "";
+    const country = property.country || "";
     locationText =
-      community !== "N/A" || country !== "N/A"
+      community !== "" || country !== ""
         ? `${community}, ${country}`
         : "Location unavailable";
   } else {
@@ -417,7 +419,7 @@ const ListingPage = () => {
               alt="logo"
             />
           </Link>
-          <div className="flex gap-2 w-full md:w-auto items-center">
+        <div className="flex gap-2 w-full md:w-auto items-center">
             <div className="flex items-center w-full md:w-[300px] border border-[#000000] shadow-sm">
               <SearchBar
                 searchQuery={searchQuery}
@@ -425,10 +427,10 @@ const ListingPage = () => {
                 onSearchSubmit={handleSearchSubmit}
               />
             </div>
-            <button
-              className="p-2"
-              onClick={() => setMenuOpen(!menuOpen)}
-            >
+            <button className="bg-[#00603A] px-4 py-[12px] flex items-center justify-center border border-[#00603A] text-white hover:text-[#00603A] hover:bg-transparent transition">
+              <FaSearch className="font-thin hover:text-[#00603A]" />
+            </button>
+            <button className="p-2" onClick={() => setMenuOpen(!menuOpen)}>
               {menuOpen ? (
                 <X className="w-6 h-6 text-[#000000]" />
               ) : (
@@ -446,7 +448,7 @@ const ListingPage = () => {
                 { name: "Penthouses", href: "/penthouses" },
                 { name: "Developments", href: "/newdevelopment" },
                 { name: "Magazine", href: "/magazine" },
-                { name: "Luxe Collectibles", href: "/listedcollectibles" },
+                { name: "Luxe Collectibles", href: "/luxecollectibles" },
               ].map((link, index) => (
                 <a
                   key={index}
@@ -494,7 +496,7 @@ const ListingPage = () => {
             </div>
           </div>
         )}
-        <div className="w-full mt-6">
+        <div className="w-full ml-6  mt-16">
           <Breadcrumb property={property} />
         </div>
         {hasSearched && searchQuery.trim() && (
@@ -541,11 +543,11 @@ const ListingPage = () => {
             )}
           </div>
         )}
-        <div className="flex flex-col md:space-x-6 mt-4 py-6 md:mt-6 space-x-2 md:space-y-0 text-center">
-          <h3 className="text-3xl pt-6 font-playfair text-[#000000] text-center mb-8 bg-white">
+        <div className="flex flex-col md:space-x-6  py-4  space-x-2 md:space-y-0 text-center">
+          <h3 className="text-3xl pt-4 font-playfair text-[#000000] text-center mb-6 bg-white">
             {property.title || "Untitled Property"}
           </h3>
-          <p className="text-base text-center font-inter">
+          <p className="text-base pb-4 text-center font-inter">
             {isCollectible
               ? `${property.category || "Luxury Item"} | ${
                   property.propertytype
@@ -745,9 +747,9 @@ const ListingPage = () => {
                       )}
                     </div>
                     <div className="flex gap-2 mt-4 border-b pb-4">
-                      <a
+                     <a
                         href={`https://wa.me/${property.whatsaapno || property.whatsappNo || "+971501234567"}?text=${encodeURIComponent(
-    `Check out this ${property.propertytype}: ${property.title} - ${currency} ${convertPrice(property.price || 0)} in ${property.community || property.category || "N/A"}, ${property.country || "N/A"} - ${property.agentname || "N/A"}`
+    `Hi, I would like to get more details on: ${property.propertytype}: ${property.title} - ${currency} ${convertPrice(property.price || 0)} in ${property.community || property.category || "N/A"}, ${property.country || "N/A"} -  ${baseUrl}/property/${property.reference || "unknown"}`
   )}`}
   target="__blank"
                         className="text-[#00603A] font-inter flex items-center space-x-1"
@@ -975,14 +977,14 @@ const ListingPage = () => {
                         {property.propertytype || "Property Type"} |{" "}
                         {property.bedrooms || "Bedrooms"} beds |{" "}
                         {property.bathrooms || "Bathrooms"} baths |{" "}
-                        {property.area || "Area"} sq. ft. |{" "}
-                        {property.plotarea || "Plot Area"} sq. ft. plot
+                        {property.size || "Area"} sq. ft. |{" "}
+                        {property.builtuparea || "Plot Area"} sq. ft. plot
                       </p>
                     </div>
                     <div className="flex gap-2 mt-4 border-b pb-4">
                       <a
                         href={`https://wa.me/${property.whatsaapno || property.whatsappNo || "+971501234567"}?text=${encodeURIComponent(
-    `Check out this ${property.propertytype}: ${property.title} - ${currency} ${convertPrice(property.price || 0)} in ${property.community || property.category || "N/A"}, ${property.country || "N/A"} - ${property.agentname || "N/A"}`
+    `Hi, I would like to get more details on: ${property.propertytype}: ${property.title} - ${currency} ${convertPrice(property.price || 0)} in ${property.community || property.category || "N/A"}, ${property.country || "N/A"}  -  ${baseUrl}/property/${property.reference || "unknown"}`
   )}`}
   target="__blank"
                         className="text-[#00603A] font-inter flex items-center space-x-1"
@@ -1001,12 +1003,7 @@ const ListingPage = () => {
                         <span>Call</span>
                       </a>
                     </div>
-                    <button
-                      onClick={() => shareToWhatsApp(true)}
-                      className="mt-4 w-full py-2 flex items-center justify-center gap-2 font-inter text-black border border-[#00603A] hover:bg-[#00603A] hover:text-white transition-all duration-300"
-                    >
-                      <FaWhatsapp /> Share via WhatsApp
-                    </button>
+                   
                   </div>
                 </div>
               </div>

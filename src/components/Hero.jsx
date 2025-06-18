@@ -121,7 +121,7 @@ const ResponsiveHero = ({ searchQuery, onSearchChange, onSearchSubmit }) => {
             setShowSuggestions(false);
             onSearchSubmit(searchQuery);
           }}
-          className="bg-white shadow-md w-full max-w-[90%] sm:max-w-xl md:max-w-3xl flex  items-center flex-wrap gap-2 p-0 mt-16 sm:mt-20 md:mt-24 rounded-none"
+          className="bg-white shadow-md w-full max-w-[90%] sm:max-w-xl md:max-w-3xl flex   items-center flex-wrap gap-2 p-0 mt-16 sm:mt-20 md:mt-24 rounded-none"
           ref={inputRef}
         >
           <div className="flex flex-1 items-center relative">
