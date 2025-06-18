@@ -97,11 +97,33 @@ const ResponsiveHero = ({ searchQuery, onSearchChange, onSearchSubmit }) => {
     };
   }, []);
 
+  // Function to scroll to search results
+  const scrollToSearchResults = () => {
+    setTimeout(() => {
+      const searchResultsElement = document.getElementById('search-results');
+      if (searchResultsElement) {
+        searchResultsElement.scrollIntoView({ 
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    }, 100); // Small delay to ensure the search results are rendered
+  };
+
   // Handle suggestion click
   const handleSuggestionClick = (suggestion) => {
     onSearchChange(suggestion);
     setShowSuggestions(false);
     onSearchSubmit(suggestion);
+    scrollToSearchResults();
+  };
+
+  // Handle form submission
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    setShowSuggestions(false);
+    onSearchSubmit(searchQuery);
+    scrollToSearchResults();
   };
 
   return (
@@ -116,11 +138,7 @@ const ResponsiveHero = ({ searchQuery, onSearchChange, onSearchSubmit }) => {
       <div className="relative z-10 flex flex-col justify-center items-center h-full text-white px-4">
         {/* Search Bar */}
         <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            setShowSuggestions(false);
-            onSearchSubmit(searchQuery);
-          }}
+          onSubmit={handleFormSubmit}
           className="bg-white shadow-md w-full max-w-[90%] sm:max-w-xl md:max-w-3xl flex   items-center flex-wrap gap-2 p-0 mt-16 sm:mt-20 md:mt-24 rounded-none"
           ref={inputRef}
         >

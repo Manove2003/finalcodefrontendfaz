@@ -749,7 +749,7 @@ const ListingPage = () => {
                     <div className="flex gap-2 mt-4 border-b pb-4">
                      <a
                         href={`https://wa.me/${property.whatsaapno || property.whatsappNo || "+971501234567"}?text=${encodeURIComponent(
-    `Hi, I would like to get more details on: ${property.propertytype}: ${property.title} - ${currency} ${convertPrice(property.price || 0)} in ${property.community || property.category || "N/A"}, ${property.country || "N/A"} -  ${baseUrl}/property/${property.reference || "unknown"}`
+    `Hi, I would like to get more details on: ${property.propertytype}: ${property.title} - ${currency} ${convertPrice(property.price || 0)} in ${property.community || property.category || " "} ${property.country} -  ${baseUrl}/property/${property.reference}`
   )}`}
   target="__blank"
                         className="text-[#00603A] font-inter flex items-center space-x-1"
@@ -974,17 +974,17 @@ const ListingPage = () => {
                         {property.title || "Untitled Property"}
                       </h3>
                       <p className="text-base break-words font-inter pt-8 border-t border-[#00603A]">
-                        {property.propertytype || "Property Type"} |{" "}
-                        {property.bedrooms || "Bedrooms"} beds |{" "}
-                        {property.bathrooms || "Bathrooms"} baths |{" "}
-                        {property.size || "Area"} sq. ft. |{" "}
-                        {property.builtuparea || "Plot Area"} sq. ft. plot
-                      </p>
+  {property.propertytype ? property.propertytype : ""}{" "}
+  {property.bedrooms ? `${property.bedrooms} beds` : ""}{" "}
+  {property.bathrooms ? `${property.bathrooms} baths` : ""}{" "}
+  {property.size ? `${property.size} sq. ft.` : ""}{" "}
+  {property.builtuparea ? `${property.builtuparea} sq. ft. plot` : ""}
+</p>
                     </div>
                     <div className="flex gap-2 mt-4 border-b pb-4">
-                      <a
+                        <a
                         href={`https://wa.me/${property.whatsaapno || property.whatsappNo || "+971501234567"}?text=${encodeURIComponent(
-    `Hi, I would like to get more details on: ${property.propertytype}: ${property.title} - ${currency} ${convertPrice(property.price || 0)} in ${property.community || property.category || "N/A"}, ${property.country || "N/A"}  -  ${baseUrl}/property/${property.reference || "unknown"}`
+    `Hi, I would like to get more details on: ${property.propertytype}: ${property.title} - ${currency} ${convertPrice(property.price || 0)} in ${property.community || property.category || " "} ${property.country} -  ${baseUrl}/property/${property.reference}`
   )}`}
   target="__blank"
                         className="text-[#00603A] font-inter flex items-center space-x-1"

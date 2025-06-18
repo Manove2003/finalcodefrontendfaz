@@ -228,36 +228,62 @@ const FeaturedListings = ({ searchQuery }) => {
     <>
       {/* Search Results Section */}
       {hasSearched && searchQuery.trim() && (
-        <div id="search-results" className="mt-4 md:-mt-8 w-full relative z-50 ">
-          {/* <h2 className="text-3xl font-playfair text-[#00603A] text-center mb-8 bg-gray-50">
-            {loading.search ? "Searching..." : `Results for "${searchQuery}"`}
-          </h2> */}
+        <div id="search-results" className="bg-white w-full relative z-50 pt-8 pb-12">
+          <div className="px-4 md:px-8 lg:px-20">
+            {/* <h2 className="text-2xl md:text-3xl font-playfair text-[#00603A] text-center md:text-left mb-8">
+              {loading.search ? "Searching..." : `Search Results for "${searchQuery}"`}
+            </h2> */}
 
-          {loading.search ? (
-            <div className="text-center">
-              <p className="text-gray-600">Searching properties...</p>
-            </div>
-          ) : errors.search ? (
-            <div className="text-center">
-              <p className="text-red-600 mb-4">{errors.search}</p>
-            </div>
-          ) : searchResults.length === 0 ? (
-            <div className="text-center">
-              <p className="text-gray-600 mb-4">
-                No properties found matching all terms: "{searchQuery}"
-              </p>
-              <p className="text-gray-500">
-                Try different combinations of location, community, or property
-                type
-              </p>
-            </div>
-          ) : (
-            <div className="px-4 md:px-10 lg:px-20 grid grid-cols-1  sm:grid-cols-2 lg:grid-cols-3 z-9999 gap-6 ">
-              {searchResults.map((mansion) => (
-                <MansionCard key={mansion.reference} mansion={mansion} />
-              ))}
-            </div>
-          )}
+            {loading.search ? (
+              <div className="text-center py-12">
+                <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-[#00603A]"></div>
+                {/* <p className="text-gray-600 mt-4">Searching properties...</p> */}
+              </div>
+            ) : errors.search ? (
+              <div className="text-center py-12">
+                <p className="text-red-600 mb-4">{errors.search}</p>
+                <button 
+                  onClick={() => window.location.reload()} 
+                  className="px-6 py-2 border border-[#00603A] text-[#00603A] hover:bg-[#00603A] hover:text-white transition-all duration-300"
+                >
+                  Try Again
+                </button>
+              </div>
+            ) : searchResults.length === 0 ? (
+              <div className="text-center py-12">
+                <div className="max-w-md mx-auto">
+                  <p className="text-gray-600 mb-4 text-lg">
+                    {/* No properties found matching: "{searchQuery}" */}
+                  </p>
+                  <p className="text-gray-500 text-sm mb-6">
+                    Try different combinations of location, community, or property type
+                  </p>
+                  <div className="text-left bg-gray-50 p-4 rounded">
+                    <p className="text-sm text-gray-600 mb-2">Suggestions:</p>
+                    <ul className="text-sm text-gray-500 space-y-1">
+                      <li>• Try "Palm Jumeirah" instead of "palm jumeriah"</li>
+                      <li>• Search by property type: "Villa", "Penthouse"</li>
+                      <li>• Search by country: "Dubai", "UAE"</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <>
+                {/* <p className="text-gray-600 mb-6 text-center md:text-left">
+                  Found {searchResults.length} {searchResults.length === 1 ? 'property' : 'properties'} matching your search
+                </p> */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                  {searchResults.map((mansion) => (
+                    <MansionCard key={mansion.reference} mansion={mansion} />
+                  ))}
+                </div>
+              </>
+            )}
+          </div>
+          
+          {/* Divider */}
+          <div className="mt-12 border-b border-[#00603A]"></div>
         </div>
       )}
 
